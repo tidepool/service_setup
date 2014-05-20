@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+def load_env_variables(service_name)
+  service_path = File.expand_path("~/.tidepool_services/#{service_name}.env")
+  env_variables = ""
+  if File.exists?(service_path) 
+    IO.readlines(service_path).each do |line|
+      env_variables = env_variables + "-e \"#{line.chomp}\" " 
+    end
+  else 
+    puts "Environment variables not found!"
+  end
+  env_variables
+end
+
+if (!ARGV.empty?)
+  service_name = ARGV.shift
+  # env_variables = load_env_variables(service_name)
+  # Set the tab title 
+  command = "echo -n -e \"\033]0;#{service_name}\007\""
+  system command
+  # Run Docker
+  port = 0
+  command = nil
+  case service_name 
+  when "db"
+    port = 49169
+    command = "docker run -rm -p #{port}:5432 --name #{service_name} tidepool/#{service_name}_dev"
+  when "redis"
+    port = 49170
+    command = "docker run -rm -p #{port}:6379 --name #{service_name} tidepool/#{service_name}_dev"    
+  when "user-service"
+    port = 49172 
+  when "game-service"
+    port = 49171
+  end
+  if (command.nil?) 
+    command = "docker run --rm -p #{port}:80 -a stdin -a stdout -a stderr --env-file ~/.tidepool_services/#{service_name}.env  --link db:db --link redis:redis --name #{service_name} tidepool/#{service_name}"
+  end
+  puts command
+  system command
+end
