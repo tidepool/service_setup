@@ -2,8 +2,16 @@
 
 This readme describes how to get the server backend of Tidepool setup on your own machine. When you are done setting up you will have the following services running on your machine:
 
-* Postgres DB: Running on port 49169 on localhost. There will be 2 databases created - ```tidepool_V2_games_dev and ```tidepool_V2_users_dev. To connect to it, you can use: (password is docker)
+* Postgres DB: Running on port 49169 on localhost. There will be 2 databases created - 
+    
+    tidepool_V2_games_dev 
 
+    and 
+    
+    tidepool_V2_users_dev. 
+  
+  To connect to it, you can use: (password is docker)
+    
     psql -h localhost -p 49169 -d tidepool_V2_games_dev -U docker --password
 
 * Redis DB: Running on port 49170 on localhost. 
@@ -51,21 +59,12 @@ We also use Redis for various temporary data storage. You will also need to inst
 
     docker build -t tidepool/redis github.com/tidepool/docker_redis
 
-Once it is built, you can run it using the included helper script here:
-
-    docker_run redis 
-
-## Installing Services (user-service and game-service)
+## Installing Services
 
 In order to install the services on your local machine:
 
     docker build -t tidepool/user-service github.com/tidepool/user_service
     docker build -t tidepool/game-service github.com/tidepool/game_service
-
-Once installed you can run them using: (in separate terminal tabs)
-
-    docker_run user-service
-    docker_run game-service
 
 ## Starting the backend 
 
@@ -79,19 +78,17 @@ Then start Redis:
 
     docker_run redis 
 
-Start user-service: (will be locally available at: (http://localhost:49172))
+Start user-service: (will be locally available at: [](http://localhost:49172))
 
     docker_run user-service
 
-Start game-service: (will be locally available at: (http://localhost:49171))
+Start game-service: (will be locally available at: [](http://localhost:49171))
 
     docker_run game-service
 
 ## Export the services from a publicly reachable URL
 
-The below services are available from the localhost. But if you need to access them through a public URL then use ngrok:
-
-    https://ngrok.com/download
+The below services are available from the localhost. But if you need to access them through a public URL then use [ngrok](https://ngrok.com/download)
 
 Once downloaded simply run :
 
