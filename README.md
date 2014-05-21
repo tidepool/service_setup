@@ -72,6 +72,10 @@ We also use Redis for various temporary data storage. You will also need to inst
 
 ## Installing Services
 
+We have a base docker image that each of the service images use. This needs to be built first:
+
+    docker build -t keremk/base_docker github.com/tidepool/base_docker
+
 In order to install the services on your local machine:
 
     docker build -t tidepool/user-service github.com/tidepool/user_service
