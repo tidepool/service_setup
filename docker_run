@@ -25,10 +25,10 @@ if (!ARGV.empty?)
   case service_name 
   when "db"
     port = 49169
-    command = "docker run -rm -p #{port}:5432 --name #{service_name} tidepool/#{service_name}_dev"
+    command = "docker run --rm -p #{port}:5432 --name #{service_name} tidepool/#{service_name}"
   when "redis"
     port = 49170
-    command = "docker run -rm -p #{port}:6379 --name #{service_name} tidepool/#{service_name}_dev"    
+    command = "docker run --rm -p #{port}:6379 --name #{service_name} tidepool/#{service_name}"    
   when "user-service"
     port = 49172 
   when "game-service"
