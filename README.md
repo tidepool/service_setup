@@ -2,23 +2,23 @@
 
 This readme describes how to get the server backend of Tidepool setup on your own machine. When you are done setting up you will have the following services running on your machine:
 
-* Postgres DB: Running on port 49169 on localhost. There will be 2 databases created - 
+* Postgres DB: Running on port **49169** on localhost. There will be 2 databases created - 
     
-    tidepool_V2_games_dev 
+        tidepool_V2_games_dev 
 
     and 
     
-    tidepool_V2_users_dev. 
+        tidepool_V2_users_dev. 
   
   To connect to it, you can use: (password is docker)
     
-    psql -h localhost -p 49169 -d tidepool_V2_games_dev -U docker --password
+        psql -h localhost -p 49169 -d tidepool_V2_games_dev -U docker --password
 
-* Redis DB: Running on port 49170 on localhost. 
+* Redis DB: Running on port **49170** on localhost. 
 
-* user-service: Running on port 49172 on localhost. 
+* user-service: Running on port **49172** on localhost. 
 
-* game-service: Running on port 49171 on localhost.
+* game-service: Running on port **49171** on localhost.
 
 ## Installing the Helper script
 
@@ -98,4 +98,10 @@ and
 
     ngrok 49171 
 
+which gives publicly reachable URLs at: (where the subdomain will be different everytime you issue the command.)
 
+    http://11d2c522.ngrok.com
+    
+If you are in the same subnet as your localhost, you can also simply use the local subnet URL without needing install and use ngrok. (See System Preferences -> Sharing for the actual URL):
+
+    http://kerems-imac.local:49172/
