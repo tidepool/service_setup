@@ -26,6 +26,17 @@ There is a helper script to run service in this repository. It is called docker_
 
     chmod +x docker_run
 
+## Environment Variables
+
+These need to be copied from the google drive share TidePool/Docker Setup to the following folder in your path: (create one if it does not exist)
+
+    ~/.tidepool_services
+
+There are 2 sets of environment variables:
+
+    game-service.env
+    user-service.env
+
 ## Installing Docker
 
 Use the below instructions to install Docker. (Homebrew install is the recommended one over installing manually. I.e unless you know what you are doing, use the Homebrew install.)
