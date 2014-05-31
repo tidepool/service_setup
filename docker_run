@@ -29,10 +29,16 @@ if (!ARGV.empty?)
   when "redis"
     port = 49170
     command = "docker run --rm -p #{port}:6379 --name #{service_name} tidepool/#{service_name}"    
+  when "mongodb"
+    port = 49168
+    command = "docker run --rm -p #{port}:27017 --name #{service_name} tidepool/#{service_name}"
   when "user-service"
     port = 49172 
   when "game-service"
     port = 49171
+  when "event-service"
+    port = 49173
+    command = "docker run --rm -p #{port}:4242 -a stdin -a stdout -a stderr --env-file ~/.tidepool_services/#{service_name}.env  --link mongodb:mongodb --name #{service_name} tidepool/#{service_name}"
   end
   if (command.nil?) 
     command = "docker run --rm -p #{port}:80 -a stdin -a stdout -a stderr --env-file ~/.tidepool_services/#{service_name}.env  --link db:db --link redis:redis --name #{service_name} tidepool/#{service_name}"
